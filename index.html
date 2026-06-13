@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      img-src 'self' data: https: http:;
+      media-src 'self' blob: https: http:;
+      script-src 'self' 'unsafe-inline' blob:;
+      style-src 'self' 'unsafe-inline';
+      worker-src 'self' blob:;
+      connect-src 'self' https://api.bgm.tv https://anispace-oauth-proxy.afterrainliu.workers.dev https://*.workers.dev https://cj.lziapi.com https://www.feisuzyapi.com https://bfzyapi.com https://www.kuaikan-api.com https://cj.ffzyapi.com https://api.dandanplay.net https://cdn.jsdelivr.net https://fastly.jsdelivr.net https://api.i-meto.com https://v1.hitokoto.cn wss: blob:;
+      frame-ancestors 'none';
+    " />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <title>ANISpace - ACG Community</title>
+    <!-- GitHub Pages SPA 路由恢复：从 404.html redirect 后恢复原始 URL -->
+    <script>
+      (function() {
+        var redirect = sessionStorage.getItem('spa_redirect');
+        if (redirect) {
+          // 不删除 spa_redirect，让 OAuthCallback 组件读取后再删除
+          // sessionStorage.removeItem('spa_redirect');
+          window.history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-23Aaubu9.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/chunk-Dlc7tRH4.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DG-hHbg4.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

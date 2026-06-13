@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ANISpace - ACG Community</title>
+    <script>
+      // GitHub Pages SPA 路由回退
+      // 当用户直接访问 /auth/github?code=xxx 等 SPA 路由时，
+      // GitHub Pages 返回此 404.html，我们需要保存原始路径并跳转到 index.html
+      // 注意：不能在此文件中引用 /src/main.jsx，因为 Vite 不会转换 public/ 下的文件
+      sessionStorage.setItem('spa_redirect', window.location.pathname + window.location.search + window.location.hash);
+      window.location.replace(window.location.origin + '/');
+    </script>
+  </head>
+  <body>
+    正在跳转...
+  </body>
+</html>
