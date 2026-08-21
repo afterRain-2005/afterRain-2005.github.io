@@ -15,7 +15,7 @@ import FansubGroupsPanel from './FansubGroups';
 import { extractPreview, typeToKey } from '../../utils/subjectType';
 import './InfoDetail.css';
 
-const API_BASE = import.meta.env.VITE_OAUTH_PROXY_URL || 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
+const API_BASE = 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
 
 const TYPE_ICONS = { 1: BookOpen, 2: Tv, 4: Gamepad2 };
 const TYPE_LABELS = { 1: '小说', 2: '动画', 3: '音乐', 4: '游戏', 6: '三次元' };

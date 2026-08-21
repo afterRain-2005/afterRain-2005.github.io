@@ -461,7 +461,7 @@ export default function UserProfilePage() {
 
     try {
       const jwt = sessionStorage.getItem('acg_jwt_token');
-      const proxyUrl = StorageService.get('acg_oauth_proxy_url') || import.meta.env.VITE_OAUTH_PROXY_URL || 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
+      const proxyUrl = StorageService.get('acg_oauth_proxy_url') || 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
       const res = await fetch(`${proxyUrl}/api/bangumi-sync/import`, {
         method: 'POST',
         headers: {
@@ -506,7 +506,7 @@ export default function UserProfilePage() {
 
     try {
       const jwt = sessionStorage.getItem('acg_jwt_token');
-      const proxyUrl = StorageService.get('acg_oauth_proxy_url') || import.meta.env.VITE_OAUTH_PROXY_URL || 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
+      const proxyUrl = StorageService.get('acg_oauth_proxy_url') || 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
       const res = await fetch(`${proxyUrl}/api/bangumi-sync/upload`, {
         method: 'POST',
         headers: {

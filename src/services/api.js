@@ -5,7 +5,8 @@ import { openDB } from 'idb';
 const { STORAGE_KEYS: SK } = StorageService;
 
 // ─── Cloudflare Worker 后端 API 基础地址 ───
-const API_BASE = import.meta.env.VITE_OAUTH_PROXY_URL || 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
+// 注：硬编码线上域名，避免被 GitHub Actions 的 VITE_OAUTH_PROXY_URL secret 覆盖
+const API_BASE = 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
 
 // ─── 后端 API 请求辅助函数 ───
 async function apiRequest(path, options = {}) {

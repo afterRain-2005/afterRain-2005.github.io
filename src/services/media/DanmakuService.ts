@@ -21,14 +21,8 @@ class DanDanPlayProvider implements DanmakuProvider {
   private proxyBase: string;
 
   constructor() {
-    // Read proxy URL from env (same as other services)
-    let rawBase = '';
-    try {
-      if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_OAUTH_PROXY_URL) {
-        rawBase = import.meta.env.VITE_OAUTH_PROXY_URL;
-      }
-    } catch {}
-    this.proxyBase = rawBase || 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
+    // 硬编码线上域名，避免被 GitHub Actions 的 VITE_OAUTH_PROXY_URL secret 覆盖
+    this.proxyBase = 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
   }
 
   async fetchDanmaku(episodeId: string): Promise<DanmakuItem[]> {

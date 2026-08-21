@@ -262,7 +262,7 @@ registerTool('comment', {
   const { subject_id, content } = params;
   if (!subject_id || !content) return { error: '缺少参数' };
   // 通过 Worker API 发表评论
-  const API_BASE = import.meta.env.VITE_OAUTH_PROXY_URL || 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
+  const API_BASE = 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
   const token = sessionStorage.getItem('acg_jwt_token');
   const res = await fetch(`${API_BASE}/api/subject-comments`, {
     method: 'POST',
@@ -296,7 +296,7 @@ registerTool('post_forum', {
   if (!currentUser?.id) return { error: '请先登录' };
   const { title, content, category } = params;
   if (!title || !content) return { error: '缺少标题或内容' };
-  const API_BASE = import.meta.env.VITE_OAUTH_PROXY_URL || 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
+  const API_BASE = 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
   const token = sessionStorage.getItem('acg_jwt_token');
   const res = await fetch(`${API_BASE}/api/posts`, {
     method: 'POST',
