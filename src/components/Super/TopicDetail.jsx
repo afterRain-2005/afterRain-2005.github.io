@@ -65,7 +65,7 @@ export default function TopicDetail() {
   }, [fetchTopic, fetchPosts]);
 
   // Handle reply
-  const handleReply = useCallback(async (content, related) => {
+  const handleReply = useCallback(async (content, related, turnstileToken) => {
     if (!isAuthenticated) {
       openAuth();
       return;
@@ -73,7 +73,7 @@ export default function TopicDetail() {
 
     setSubmitting(true);
     try {
-      await SuperService.createPost(topicId, content, related);
+      await SuperService.createPost(topicId, content, related, turnstileToken);
       // Refresh posts
       await fetchPosts();
       // Clear related state
@@ -197,6 +197,19 @@ export default function TopicDetail() {
         </div>
       </div>
 
+      {/* Reply input */}
+      <div className="td-reply-section">
+        <h2 className="td-reply-title">发表回复</h2>
+        <ReplyInput
+          onSubmit={handleReply}
+          related={relatedPostId}
+          relatedAuthor={relatedAuthor}
+          disabled={!isAuthenticated}
+          loading={submitting}
+          onClearRelated={handleClearRelated}
+        />
+      </div>
+
       {/* Posts list */}
       <div className="td-posts-section">
         <div className="td-posts-header">
@@ -255,18 +268,6 @@ export default function TopicDetail() {
         )}
       </div>
 
-      {/* Reply input */}
-      <div className="td-reply-section">
-        <h2 className="td-reply-title">发表回复</h2>
-        <ReplyInput
-          onSubmit={handleReply}
-          related={relatedPostId}
-          relatedAuthor={relatedAuthor}
-          disabled={!isAuthenticated}
-          loading={submitting}
-          onClearRelated={handleClearRelated}
-        />
-      </div>
     </div>
   );
 }

@@ -28,6 +28,46 @@
   margin: 0;
 }
 
+/* ─── View Tabs ─── */
+
+.sh-view-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border-primary, rgba(255,255,255,0.1));
+  margin-bottom: 16px;
+}
+
+.sh-view-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-secondary, rgba(255,255,255,0.6));
+  transition: all 0.2s;
+}
+
+.sh-view-tab:hover {
+  color: var(--text-primary, rgba(255,255,255,0.9));
+}
+
+.sh-view-tab.active {
+  color: var(--primary, #ff6b9d);
+  border-bottom-color: var(--primary, #ff6b9d);
+}
+
+/* ─── Topics List ─── */
+
+.sh-topics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 /* ─── Toolbar ─── */
 
 .sh-toolbar {

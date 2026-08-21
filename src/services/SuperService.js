@@ -9,6 +9,19 @@ import { apiRequest } from './api.js';
  */
 export const SuperService = {
   /**
+   * 获取最新小组话题列表（超展开首页）
+   * @param {number} page - 页码
+   * @param {number} limit - 每页数量
+   * @param {string} mode - 过滤模式 (all|joined|created|replied)
+   * @returns {Promise<{data: Array, total: number}>}
+   */
+  async getLatestTopics(page = 1, limit = 20, mode = 'all') {
+    const offset = (page - 1) * limit;
+    const params = new URLSearchParams({ limit, offset, mode });
+    return apiRequest(`/api/super/topics/latest?${params.toString()}`);
+  },
+
+  /**
    * 获取小组列表
    * @param {number} page - 页码
    * @param {number} limit - 每页数量
@@ -81,11 +94,13 @@ export const SuperService = {
    * @param {number} topicId - 话题 ID
    * @param {string} content - 回复内容
    * @param {number} related - 关联帖子 ID（回复某楼层）
+   * @param {string} turnstileToken - Cloudflare Turnstile 人机验证令牌
    * @returns {Promise<{id: number, success: boolean}>}
    */
-  async createPost(topicId, content, related = null) {
+  async createPost(topicId, content, related = null, turnstileToken = null) {
     const body = { content };
     if (related) body.related = related;
+    if (turnstileToken) body.turnstileToken = turnstileToken;
     return apiRequest(`/api/super/topics/${topicId}/posts`, {
       method: 'POST',
       body: JSON.stringify(body),

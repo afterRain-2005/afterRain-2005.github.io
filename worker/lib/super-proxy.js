@@ -86,6 +86,50 @@ export async function proxyBangumiAPI(endpoint, accessToken, options = {}) {
 }
 
 /**
+ * 获取最新小组话题列表（超展开首页）
+ * GET /api/super/topics/latest
+ * 使用 Bangumi p1 API: p1/groups/-/topics?mode=all
+ * @param {object} db - D1 数据库
+ * @param {number} userId - 用户 ID
+ * @param {object} params - 查询参数（limit, offset, mode）
+ * @returns {object} 话题列表
+ */
+export async function handleLatestTopics(db, userId, params = {}) {
+  const tokenInfo = await getBangumiToken(db, userId);
+  if (!tokenInfo) {
+    return { error: '请先绑定 Bangumi 账号', status: 401 };
+  }
+  if (tokenInfo.expired) {
+    return { error: 'Bangumi token 已过期，请重新绑定', status: 401 };
+  }
+
+  const { limit = 20, offset = 0, mode = 'all' } = params;
+  const result = await proxyBangumiAPI('/p1/groups/-/topics', tokenInfo.accessToken, {
+    params: { limit, offset, mode },
+  });
+  if (result.error) return result;
+
+  // 映射为前端期望的格式
+  const topics = (result.data?.data || []).map(t => ({
+    id: t.id,
+    title: t.title || '',
+    author: t.creator?.nickname || t.creator?.username || '匿名',
+    author_avatar: t.creator?.avatar?.medium || t.creator?.avatar?.small || '',
+    replies: t.replyCount || 0,
+    created_at: t.createdAt ? new Date(t.createdAt * 1000).toISOString() : '',
+    updated_at: t.updatedAt ? new Date(t.updatedAt * 1000).toISOString() : '',
+    group: t.group ? {
+      id: t.group.id,
+      name: t.group.name,
+      title: t.group.title,
+      icon: t.group.icon?.medium || t.group.icon?.small || '',
+    } : null,
+  }));
+
+  return { data: { data: topics, total: result.data?.total || 0 }, status: 200 };
+}
+
+/**
  * 处理小组列表请求
  * GET /api/super/groups
  * @param {object} db - D1 数据库
@@ -346,7 +390,12 @@ export async function handleCreatePost(db, env, userId, topicId, body) {
     return { error: '回复内容不能为空', status: 400 };
   }
 
-  const postBody = { content: body.content };
+  // Bangumi p1 API 要求 turnstileToken（Cloudflare Turnstile 人机验证令牌）
+  if (!body.turnstileToken) {
+    return { error: '缺少人机验证令牌，无法发表回复', status: 400 };
+  }
+
+  const postBody = { content: body.content, turnstileToken: body.turnstileToken };
   if (body.related) {
     postBody.related = body.related; // 关联帖子 ID（回复某楼层）
   }

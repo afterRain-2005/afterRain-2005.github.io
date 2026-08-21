@@ -28,7 +28,7 @@ class DanDanPlayProvider implements DanmakuProvider {
         rawBase = import.meta.env.VITE_OAUTH_PROXY_URL;
       }
     } catch {}
-    this.proxyBase = rawBase || 'https://anispace-oauth-proxy.afterrainliu.workers.dev';
+    this.proxyBase = rawBase || 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
   }
 
   async fetchDanmaku(episodeId: string): Promise<DanmakuItem[]> {

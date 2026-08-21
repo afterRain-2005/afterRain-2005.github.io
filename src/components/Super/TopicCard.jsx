@@ -23,6 +23,7 @@ export default function TopicCard({ topic }) {
     replies = 0,
     created_at,
     updated_at,
+    group,
   } = topic;
 
   // 格式化时间显示
@@ -66,6 +67,12 @@ export default function TopicCard({ topic }) {
 
         <div className="tc-meta">
           <span className="tc-author">{author || '匿名用户'}</span>
+          {group && (
+            <span className="tc-group">
+              {group.icon && <img src={group.icon} alt="" className="tc-group-icon" />}
+              <span>{group.title}</span>
+            </span>
+          )}
           <span className="tc-stat">
             <MessageCircle size={14} />
             <span>{replies.toLocaleString()}</span>

@@ -1,7 +1,7 @@
 name = "anispace-oauth-proxy"
 main = "oauth-proxy.js"
 compatibility_date = "2024-01-01"
-account_id = "4f0560fe4eba4e3180a15e8f43ce6d92"
+account_id = "e3859153513e18ee3e56cc9345846356"
 workers_dev = true
 
 [vars]
@@ -12,7 +12,7 @@ BANGUMI_CLIENT_ID = "bgm63786a34fc67673eb"
 [[d1_databases]]
 binding = "DB"
 database_name = "anispace-db"
-database_id = "b3d41a07-90b8-4cfe-8142-5679bc768c06"
+database_id = "30523091-5d5d-449d-9e22-abe26bf2233b"
 
 # R2 Bucket — 论坛图片上传存储（需要先在 Cloudflare Dashboard 启用 R2）
 # 启用 R2 后取消注释以下配置

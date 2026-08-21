@@ -5,7 +5,7 @@ import { BangumiAuthService, GitHubAuthService, StorageService } from '../servic
 import { Loader2, CheckCircle, XCircle, Download } from 'lucide-react';
 import './OAuthCallback.css';
 
-const API_BASE = import.meta.env.VITE_OAUTH_PROXY_URL || 'https://anispace-oauth-proxy.afterrainliu.workers.dev';
+const API_BASE = import.meta.env.VITE_OAUTH_PROXY_URL || 'https://anispace-oauth-proxy.lyw2373314970.workers.dev';
 
 export default function OAuthCallback() {
   const navigate = useNavigate();
